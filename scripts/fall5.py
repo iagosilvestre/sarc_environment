@@ -16,7 +16,7 @@ class Activator:
     def callback(self, data):
         body_name = uav_name + '::base_link'
         wrench = Wrench()
-        force = [10, 10, 10] #air resistance
+        force = [2, 2, 2] #air resistance
         wrench.force = Vector3(*force)
         duration = rospy.Duration(5)
         
