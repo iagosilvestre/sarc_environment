@@ -1,12 +1,16 @@
 name: simulation
 root: ./
 startup_window: status
-pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=t650; export WORLD_NAME=simulation; export SENSORS="garmin_down"
+pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=f450; export WORLD_NAME=simulation; export SENSORS="garmin_down"
 windows:
   - roscore:
       layout: tiled
       panes:
         - roscore
+  - rosbridge:
+      layout: tiled
+      panes:
+        - waitForRos; roslaunch rosbridge_server rosbridge_websocket.launch
   - gazebo:
       layout: tiled
       panes:
@@ -20,18 +24,30 @@ windows:
   - spawn:
       layout: tiled
       panes:
-        # uav 1
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos1.yaml"
+        # uav 1 maybe use same pos for every drone
+        - waitForSimulation;
+          sleep 10;
+          rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos1.yaml"
         # uav 2
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos2.yaml"
+        - waitForSimulation;
+          sleep 20;
+          rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos2.yaml"
         # uav 3
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "3 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos3.yaml"
+        - waitForSimulation;
+          sleep 30;
+          rosservice call /mrs_drone_spawner/spawn "3 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos3.yaml"
         # uav 4
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "4 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos4.yaml"
+        - waitForSimulation;
+          sleep 40;
+          rosservice call /mrs_drone_spawner/spawn "4 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos4.yaml"
         # uav 5
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "5 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos5.yaml"
-        # uav 6
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "6 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos6.yaml"
+        - waitForSimulation;
+          sleep 50;
+          rosservice call /mrs_drone_spawner/spawn "5 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos5.yaml"
+        # uav 6 
+        - waitForSimulation;
+          sleep 60;
+          rosservice call /mrs_drone_spawner/spawn "6 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos6.yaml"
   - control:
       layout: tiled
       panes:
@@ -46,7 +62,9 @@ windows:
       panes:
         # uav 1
         - waitForRos; rosrun sarc_environment fall.py
-        # uav 2
+        # uav 2 sleep 40;
+        #rosservice call /$UAV_NAME/control_manager/set_min_height 15
+        #rosservice call /$UAV_NAME/control_manager/goto_altitude 15
         - waitForRos; rosrun sarc_environment fall2.py
         # uav 3
         - waitForRos; rosrun sarc_environment fall3.py

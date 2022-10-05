@@ -20,7 +20,7 @@ rospy.init_node('sarc_low_map', anonymous=True)
 rate = rospy.Rate(10) # 10hz
 quant = 1 ## this quantity is this number times 3, since each tree type will have this many replicas
 dronesquant = 6 ## number of drones to spawn, above 5 pay atention in the spawn circle radius
-spawnCircleRadius = 0.95
+spawnCircleRadius = 1.50
 
 def sarc_low_map():
   startText = "<?xml version='1.0' ?>\n\
