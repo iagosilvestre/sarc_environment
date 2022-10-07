@@ -20,57 +20,83 @@ windows:
   - status:
       layout: tiled
       panes:
-        - waitForSimulation; roslaunch mrs_uav_status status.launch
+        #- waitForSimulation; roslaunch mrs_uav_status status.launch
   - spawn:
       layout: tiled
       panes:
         # uav 1 maybe use same pos for every drone
-        - waitForSimulation;
-          sleep 10;
-          rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos1.yaml"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/posG/pos1.yaml";
+          export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch
         # uav 2
-        - waitForSimulation;
-          sleep 20;
-          rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos2.yaml"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/posG/pos2.yaml";
+          export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch
         # uav 3
-        - waitForSimulation;
-          sleep 30;
-          rosservice call /mrs_drone_spawner/spawn "3 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos3.yaml"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "3 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/posG/pos3.yaml";
+          export UAV_NAME=uav3; waitForOdometry; roslaunch mrs_uav_general core.launch
         # uav 4
-        - waitForSimulation;
-          sleep 40;
-          rosservice call /mrs_drone_spawner/spawn "4 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos4.yaml"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "4 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/posG/pos4.yaml";
+          export UAV_NAME=uav4; waitForOdometry; roslaunch mrs_uav_general core.launch
         # uav 5
-        - waitForSimulation;
-          sleep 50;
-          rosservice call /mrs_drone_spawner/spawn "5 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos5.yaml"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "5 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/posG/pos5.yaml";
+          export UAV_NAME=uav5; waitForOdometry; roslaunch mrs_uav_general core.launch
         # uav 6 
-        - waitForSimulation;
-          sleep 60;
-          rosservice call /mrs_drone_spawner/spawn "6 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos6.yaml"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "6 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/posG/pos6.yaml";
+          export UAV_NAME=uav6; waitForOdometry; roslaunch mrs_uav_general core.launch
   - control:
       layout: tiled
       panes:
-        - export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav3; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav4; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav5; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav6; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch
+          #rosservice call /gazebo/set_model_state '{model_name: uav1, pose: { position: { x: 1.5, y: 0.0, z: 98.6 }, orientation: {x: 0, y: 0.0, z: 0, w: 0.0 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular: { x: 0, y: 0, z: 0}  }, reference_frame: world }'
+          #rosservice call set model state
+        #- export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav3; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav4; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav5; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav6; waitForOdometry; roslaunch mrs_uav_general core.launch
   - arming:
       layout: tiled
       panes:
         # uav 1
-        - waitForRos; rosrun sarc_environment fall.py
+        - waitForOdometry;export UAV_NAME=uav1;
+          sleep 10;
+          rosservice call /$UAV_NAME/control_manager/motors 1;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+       #- waitForRos; rosrun sarc_environment fall.py
+        - waitForOdometry;export UAV_NAME=uav2;
+          sleep 10;
+          rosservice call /$UAV_NAME/control_manager/motors 1;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav3;
+          sleep 10;
+          rosservice call /$UAV_NAME/control_manager/motors 1;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav4;
+          sleep 10;
+          rosservice call /$UAV_NAME/control_manager/motors 1;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav5;
+          sleep 10;
+          rosservice call /$UAV_NAME/control_manager/motors 1;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav6;
+          sleep 10;
+          rosservice call /$UAV_NAME/control_manager/motors 1;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
         # uav 2 sleep 40;
         #rosservice call /$UAV_NAME/control_manager/set_min_height 15
         #rosservice call /$UAV_NAME/control_manager/goto_altitude 15
-        - waitForRos; rosrun sarc_environment fall2.py
+        #- waitForRos; rosrun sarc_environment fall2.py
         # uav 3
-        - waitForRos; rosrun sarc_environment fall3.py
+        #- waitForRos; rosrun sarc_environment fall3.py
         # uav 4
-        - waitForRos; rosrun sarc_environment fall4.py
+        #- waitForRos; rosrun sarc_environment fall4.py
         # uav 5
-        - waitForRos; rosrun sarc_environment fall5.py
+        #- waitForRos; rosrun sarc_environment fall5.py
         # uav 6
-        - waitForRos; rosrun sarc_environment fall6.py
+        #- waitForRos; rosrun sarc_environment fall6.py
