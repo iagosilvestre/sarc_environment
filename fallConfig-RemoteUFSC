@@ -1,0 +1,6 @@
+Funcionou para 1 sozinho dentro do kc sessionDefault: Testado na simulacao com os 6 armando no chao e nao funcionou
+
+        force = [5, 5, 5]
+        wrench.force = Vector3(*force)
+        duration = rospy.Duration(40)
+        

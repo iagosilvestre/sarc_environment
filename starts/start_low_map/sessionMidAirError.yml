@@ -1,7 +1,7 @@
 name: simulation
 root: ./
 startup_window: status
-pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=t650; export WORLD_NAME=simulation; export SENSORS="garmin_down"
+pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=f450; export WORLD_NAME=simulation; export SENSORS="garmin_down"
 windows:
   - roscore:
       layout: tiled
@@ -20,11 +20,11 @@ windows:
   - status:
       layout: tiled
       panes:
-        - waitForSimulation; roslaunch mrs_uav_status status.launch
+        #- waitForSimulation; roslaunch mrs_uav_status status.launch
   - spawn:
       layout: tiled
       panes:
-        # uav 1 maybe use same pos for every drone
+        # uav 1
         - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos1.yaml"
         # uav 2
         - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable-ground-truth --pos_file `pwd`/pos/pos2.yaml"
@@ -50,15 +50,13 @@ windows:
       panes:
         # uav 1
         - waitForRos; rosrun sarc_environment fall.py
-        # uav 2 sleep 40;
-        #rosservice call /$UAV_NAME/control_manager/set_min_height 15
-        #rosservice call /$UAV_NAME/control_manager/goto_altitude 15
-        #- waitForRos; rosrun sarc_environment fall2.py
+        # uav 2 
+        - waitForRos; rosrun sarc_environment fall2.py
         # uav 3
-        #- waitForRos; rosrun sarc_environment fall3.py
+        - waitForRos; rosrun sarc_environment fall3.py
         # uav 4
-        #- waitForRos; rosrun sarc_environment fall4.py
+        - waitForRos; rosrun sarc_environment fall4.py
         # uav 5
-        #- waitForRos; rosrun sarc_environment fall5.py
+        - waitForRos; rosrun sarc_environment fall5.py
         # uav 6
-        #- waitForRos; rosrun sarc_environment fall6.py
+        - waitForRos; rosrun sarc_environment fall6.py
