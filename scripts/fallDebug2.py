@@ -15,7 +15,7 @@ from gazebo_msgs.srv import DeleteModel, DeleteModelRequest, ApplyBodyWrench
 from geometry_msgs.msg import Point, Wrench, Vector3
 
 global uav_name
-uav_name = "uav1"
+uav_name = "uav2"
 def set_item(goal_x, goal_y,goal_z,objeto):
          state_msg = ModelState()
 
@@ -52,7 +52,7 @@ class Activator:
         rospy.loginfo('arming')
         self.arm(1)
         rospy.loginfo('setting pos to inside kc')
-        set_item(1.5,0,98.6,'uav1')
+        set_item(0.75,1.299,98.6,'uav2')
         rospy.loginfo('activating')
         self.activate()
         rospy.sleep(1)
