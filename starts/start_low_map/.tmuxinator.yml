@@ -57,39 +57,39 @@ windows:
       layout: tiled
       panes:
         # uav 1
-        - waitForOdometry;export UAV_NAME=uav1;
-          sleep 10;
-          rosservice call /$UAV_NAME/control_manager/motors 1;
-          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
-          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav1
+          #sleep 10;
+          #rosservice call /$UAV_NAME/control_manager/motors 1;
+          #rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          #rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
           #rosservice set model state dando problema, Failed to parse config file: (<unknown>): mapping values are not allowed in this context
           #rosservice call /gazebo/set_model_state '{model_state: { model_name: uav1, pose: { position: { x: 1.5, y: 0.0, z: 98.6 }, orientation: {x: 0, y: 0.0, z: 0, w: 0.0 } }, twist: { linear: {x: 0.0 , y: 0 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'; rosrun sarc_environment fall.py
        #- waitForRos; rosrun sarc_environment fall.py
-        - waitForOdometry;export UAV_NAME=uav2;
-          sleep 10;
-          rosservice call /$UAV_NAME/control_manager/motors 1;
-          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
-          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
-        - waitForOdometry;export UAV_NAME=uav3;
-          sleep 10;
-          rosservice call /$UAV_NAME/control_manager/motors 1;
-          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
-          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
-        - waitForOdometry;export UAV_NAME=uav4;
-          sleep 10;
-          rosservice call /$UAV_NAME/control_manager/motors 1;
-          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
-          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
-        - waitForOdometry;export UAV_NAME=uav5;
-          sleep 10;
-          rosservice call /$UAV_NAME/control_manager/motors 1;
-          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
-          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
-        - waitForOdometry;export UAV_NAME=uav6;
-          sleep 10;
-          rosservice call /$UAV_NAME/control_manager/motors 1;
-          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
-          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav2
+          #sleep 10;
+          #rosservice call /$UAV_NAME/control_manager/motors 1;
+          #rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          #rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav3
+          #sleep 10;
+          #rosservice call /$UAV_NAME/control_manager/motors 1;
+          #rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          #rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav4
+          #sleep 10;
+          #rosservice call /$UAV_NAME/control_manager/motors 1;
+          #rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          #rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav5
+          #sleep 10;
+          #rosservice call /$UAV_NAME/control_manager/motors 1;
+          #rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          #rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
+        - waitForOdometry;export UAV_NAME=uav6
+          #sleep 10;
+          #rosservice call /$UAV_NAME/control_manager/motors 1;
+          #rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          #rosservice call /$UAV_NAME/mavros/set_mode 0 offboard
         # uav 2 sleep 40;
         #rosservice call /$UAV_NAME/control_manager/set_min_height 15
         #rosservice call /$UAV_NAME/control_manager/goto_altitude 15
