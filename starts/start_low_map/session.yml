@@ -92,21 +92,16 @@ windows:
         # uav 2 sleep 40;
         #rosservice call /$UAV_NAME/control_manager/set_min_height 15
         #rosservice call /$UAV_NAME/control_manager/goto_altitude 15
+        #waitForRos; rosrun sarc_environment fall.py
         # uav 1
-        - sleep 10;
-          waitForRos; rosrun sarc_environment fall.py
+        - sleep 20; waitForRos; rosrun sarc_environment fall.py
         # uav 2
-        - sleep 10;
-          waitForRos; rosrun sarc_environment fall2.py
+        - sleep 20; waitForRos; rosrun sarc_environment fall2.py
         # uav 3
-        - sleep 10;
-          waitForRos; rosrun sarc_environment fall3.py
+        - sleep 20; waitForRos; rosrun sarc_environment fall3.py
         # uav 4
-        - sleep 10;
-          waitForRos; rosrun sarc_environment fall4.py
+        - sleep 20; waitForRos; rosrun sarc_environment fall4.py
         # uav 5
-        - sleep 10;
-          waitForRos; rosrun sarc_environment fall5.py
+        - sleep 20; waitForRos; rosrun sarc_environment fall5.py
         # uav 6
-        - sleep 10;
-          waitForRos; rosrun sarc_environment fall6.py
+        - sleep 20; waitForRos; rosrun sarc_environment fall6.py
