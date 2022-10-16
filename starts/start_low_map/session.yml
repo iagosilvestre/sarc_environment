@@ -51,7 +51,7 @@ windows:
       layout: tiled
       panes:
        # uav 1
-        - waitForSimulation; sleep 30; rosrun sarc_environment fall.py
+        - waitForSimulation; rosrun sarc_environment fall.py
         # uav 2
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall2.py
         # uav 3

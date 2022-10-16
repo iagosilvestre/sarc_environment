@@ -47,7 +47,7 @@ class Activator:
         force = [3, 3, 3]
         wrench.force = Vector3(*force)
         duration = rospy.Duration(15)
-
+        rospy.sleep(15)
         self.arm1(1)
         self.arm2(1)
         self.arm3(1)
@@ -58,8 +58,13 @@ class Activator:
         dele = DeleteModelRequest()
         dele.model_name = "SARckc_floor"
         self.delete(dele)
-        #self.activate()
-        activateAll()
+        self.activate1()
+        self.activate2()
+        self.activate3()
+        self.activate4()
+        self.activate5()
+        self.activate6()
+        #activateAll()
         rospy.sleep(1)
         rospy.loginfo('applying')
         self.apply_wrench(body_name, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
@@ -82,7 +87,12 @@ class Activator:
         self.arm4 = rospy.ServiceProxy('/uav4/mavros/cmd/arming', CommandBool)
         self.arm5 = rospy.ServiceProxy('/uav5/mavros/cmd/arming', CommandBool)
         self.arm6 = rospy.ServiceProxy('/uav6/mavros/cmd/arming', CommandBool)
-        self.activate = rospy.ServiceProxy('/' + uav_name + '/uav_manager/midair_activation', Trigger)
+        self.activate1 = rospy.ServiceProxy('/' + uav_name + '/uav_manager/midair_activation', Trigger)
+        self.activate2 = rospy.ServiceProxy('/uav2/uav_manager/midair_activation', Trigger)
+        self.activate3 = rospy.ServiceProxy('/uav3/uav_manager/midair_activation', Trigger)
+        self.activate4 = rospy.ServiceProxy('/uav4/uav_manager/midair_activation', Trigger)
+        self.activate5 = rospy.ServiceProxy('/uav5/uav_manager/midair_activation', Trigger)
+        self.activate6 = rospy.ServiceProxy('/uav6/uav_manager/midair_activation', Trigger)
         self.apply_wrench = rospy.ServiceProxy('/gazebo/apply_body_wrench', ApplyBodyWrench)
         
         rospy.loginfo('initialized')
