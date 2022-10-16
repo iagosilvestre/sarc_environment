@@ -58,6 +58,7 @@ class Activator:
         dele = DeleteModelRequest()
         dele.model_name = "SARckc_floor"
         self.delete(dele)
+        rospy.sleep(0.2)
         self.activate1()
         self.activate2()
         self.activate3()
