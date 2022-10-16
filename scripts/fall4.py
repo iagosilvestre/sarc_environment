@@ -51,8 +51,6 @@ class Activator:
         self.delete(dele)
         rospy.loginfo('arming')
         self.arm(1)
-        rospy.loginfo('setting pos to inside kc')
-        set_item(-1.5,0,98.6,uav_name)
         rospy.loginfo('activating')
         self.activate()
         rospy.sleep(1)

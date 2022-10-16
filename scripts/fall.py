@@ -16,48 +16,58 @@ from geometry_msgs.msg import Point, Wrench, Vector3
 
 global uav_name
 uav_name = "uav1"
-def set_item(goal_x, goal_y,goal_z,objeto):
-         state_msg = ModelState()
 
-         state_msg.model_name = objeto
-         state_msg.pose.position.x = goal_x
-         state_msg.pose.position.y = goal_y
-         state_msg.pose.position.z = goal_z
-         state_msg.pose.orientation.x = 0
-         state_msg.pose.orientation.y = 0
-         state_msg.pose.orientation.z = 0
-         state_msg.pose.orientation.w = 0
+def armAll():
+    rospy.loginfo('arming')
+    rospy.ServiceProxy('/' + uav_name + '/mavros/cmd/arming', CommandBool)
+    rospy.ServiceProxy('/uav2/mavros/cmd/arming', CommandBool)
+    rospy.ServiceProxy('/uav3/mavros/cmd/arming', CommandBool)
+    rospy.ServiceProxy('/uav4/mavros/cmd/arming', CommandBool)
+    rospy.ServiceProxy('/uav5/mavros/cmd/arming', CommandBool)
+    rospy.ServiceProxy('/uav6/mavros/cmd/arming', CommandBool)
 
-         rospy.wait_for_service('/gazebo/set_model_state')
-         try:
-               set_state = rospy.ServiceProxy(
-                  '/gazebo/set_model_state', SetModelState)
-               resp = set_state(state_msg)
-               print(state_msg)
-
-         except rospy.ServiceException as e:
-               print ("Service call failed: %s" % e)
+def activateAll():
+    rospy.loginfo('activating')
+    rospy.ServiceProxy('/' + uav_name + '/uav_manager/midair_activation', Trigger)
+    rospy.ServiceProxy('/uav2/uav_manager/midair_activation', Trigger)
+    rospy.ServiceProxy('/uav3/uav_manager/midair_activation', Trigger)
+    rospy.ServiceProxy('/uav4/uav_manager/midair_activation', Trigger)
+    rospy.ServiceProxy('/uav5/uav_manager/midair_activation', Trigger)
+    rospy.ServiceProxy('/uav6/uav_manager/midair_activation', Trigger)
 
 class Activator:
     def callback(self, data):
         body_name = uav_name + '::base_link'
+        body_name2 = 'uav2::base_link'
+        body_name3 = 'uav3::base_link'
+        body_name4 = 'uav4::base_link'
+        body_name5 = 'uav5::base_link'
+        body_name6 = 'uav6::base_link'
         wrench = Wrench()
         force = [3, 3, 3]
         wrench.force = Vector3(*force)
         duration = rospy.Duration(15)
-        
+
+        self.arm1(1)
+        self.arm2(1)
+        self.arm3(1)
+        self.arm4(1)
+        self.arm5(1)
+        self.arm6(1)
+        #armAll(1)
         dele = DeleteModelRequest()
         dele.model_name = "SARckc_floor"
         self.delete(dele)
-        rospy.loginfo('arming')
-        self.arm(1)
-        rospy.loginfo('setting pos to inside kc')
-        set_item(1.5,0,98.6,uav_name)
-        rospy.loginfo('activating')
-        self.activate()
+        #self.activate()
+        activateAll()
         rospy.sleep(1)
         rospy.loginfo('applying')
         self.apply_wrench(body_name, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
+        self.apply_wrench(body_name2, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
+        self.apply_wrench(body_name3, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
+        self.apply_wrench(body_name4, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
+        self.apply_wrench(body_name5, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
+        self.apply_wrench(body_name6, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
         rospy.signal_shutdown("yes")
 
     def __init__(self):
@@ -66,7 +76,12 @@ class Activator:
 
         self.delete = rospy.ServiceProxy('/gazebo/delete_model', DeleteModel)    
         self.subscriber = rospy.Subscriber('/' + uav_name + '/uav_manager/diagnostics', UavManagerDiagnostics, self.callback)
-        self.arm = rospy.ServiceProxy('/' + uav_name + '/mavros/cmd/arming', CommandBool)
+        self.arm1 = rospy.ServiceProxy('/' + uav_name + '/mavros/cmd/arming', CommandBool)
+        self.arm2 = rospy.ServiceProxy('/uav2/mavros/cmd/arming', CommandBool)
+        self.arm3 = rospy.ServiceProxy('/uav3/mavros/cmd/arming', CommandBool)
+        self.arm4 = rospy.ServiceProxy('/uav4/mavros/cmd/arming', CommandBool)
+        self.arm5 = rospy.ServiceProxy('/uav5/mavros/cmd/arming', CommandBool)
+        self.arm6 = rospy.ServiceProxy('/uav6/mavros/cmd/arming', CommandBool)
         self.activate = rospy.ServiceProxy('/' + uav_name + '/uav_manager/midair_activation', Trigger)
         self.apply_wrench = rospy.ServiceProxy('/gazebo/apply_body_wrench', ApplyBodyWrench)
         

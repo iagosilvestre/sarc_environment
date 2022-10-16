@@ -42,17 +42,15 @@ class Activator:
     def callback(self, data):
         body_name = uav_name + '::base_link'
         wrench = Wrench()
-        force = [3, 3, 3]
+        force = [2, 2, 2]
         wrench.force = Vector3(*force)
-        duration = rospy.Duration(15)
+        duration = rospy.Duration(40)
         
         dele = DeleteModelRequest()
         dele.model_name = "SARckc_floor"
         self.delete(dele)
         rospy.loginfo('arming')
         self.arm(1)
-        rospy.loginfo('setting pos to inside kc')
-        set_item(-0.75,1.299,98.6,uav_name)
         rospy.loginfo('activating')
         self.activate()
         rospy.sleep(1)
