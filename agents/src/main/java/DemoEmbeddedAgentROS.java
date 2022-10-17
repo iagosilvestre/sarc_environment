@@ -47,6 +47,8 @@ public class DemoEmbeddedAgentROS extends EmbeddedAgent {
         addTopic("detect_fire_uav10", "std_msgs/Int8");
         addTopic("detect_fire_uav11", "std_msgs/Int8");
         addTopic("detect_fire_uav12", "std_msgs/Int8");
+        addTopic("landing_x", "std_msgs/Float64");
+        addTopic("landing_y", "std_msgs/Float64");
                
 		/* roscore1 is a connection with a ros master. Instantiate new DefaultRos4EmbeddedMas connect the agent with more ros masters*/
 		DefaultRos4EmbeddedMas roscore1 = new DefaultRos4EmbeddedMas("ws://localhost:9090",nodes, topics);		

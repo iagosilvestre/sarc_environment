@@ -14,6 +14,10 @@ from std_srvs.srv import Trigger as Trigger
 from gazebo_msgs.srv import DeleteModel, DeleteModelRequest, ApplyBodyWrench
 from geometry_msgs.msg import Point, Wrench, Vector3
 
+from nav_msgs.msg import Odometry
+from std_msgs.msg import Header, Float64
+from gazebo_msgs.srv import GetLinkState, GetLinkStateRequest
+
 global uav_name
 uav_name = "uav1"
 
@@ -43,7 +47,7 @@ class Activator:
         dele.model_name = "SARckc_floor"
         self.delete(dele)
         rospy.sleep(0.2)
-        
+
         self.activate1()
         self.activate2()
         self.activate3()
@@ -59,7 +63,34 @@ class Activator:
         self.apply_wrench(body_name4, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
         self.apply_wrench(body_name5, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
         self.apply_wrench(body_name6, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
-        rospy.signal_shutdown("yes")
+        #rospy.signal_shutdown("yes")
+
+        x_pub=rospy.Publisher ('/landing_x', Float64,queue_size=10)
+        y_pub=rospy.Publisher ('/landing_y', Float64,queue_size=10)
+
+        rospy.wait_for_service ('/gazebo/get_link_state')
+        get_link_srv = rospy.ServiceProxy('/gazebo/get_link_state', GetLinkState)
+
+        xland = Float64()
+        yland = Float64()
+
+        link = GetLinkStateRequest()
+        link.link_name='SARclandArea::link'
+        r = rospy.Rate(1)
+
+
+        while not rospy.is_shutdown():
+            result = get_link_srv(link)
+
+            xland.data = result.link_state.pose.position.x
+            yland.data = result.link_state.pose.position.y
+
+            #print(xland)
+            #print(yland)
+            x_pub.publish (xland)
+            y_pub.publish (yland)
+            r.sleep()
+            #rospy.signal_shutdown("yes")
 
     def __init__(self):
 

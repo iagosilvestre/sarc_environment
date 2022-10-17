@@ -6,6 +6,7 @@ camera_range(50).
 std_altitude(20.0).
 std_heading(0.0).
 land_point(-102.0, -111.0).
+//land_point(landing_x(LX),landing_y(LY)).
 land_radius(10.0).
 diff(1).
 
@@ -34,6 +35,7 @@ near(X, Y) :- current_position(CX, CY, CZ)
 my_number_string(S) :- my_number(N)
                        & .term2string(N, S).
 
+
 +detect_fire_uav1(N) : my_number(N) <- !detected_fire(N).
 +detect_fire_uav2(N) : my_number(N) <- !detected_fire(N).
 +detect_fire_uav3(N) : my_number(N) <- !detected_fire(N).
@@ -46,6 +48,7 @@ my_number_string(S) :- my_number(N)
 
 +!start
     <- .wait(100);
+      //+land_point(landing_x,landing_y);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
       !calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
