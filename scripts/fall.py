@@ -17,24 +17,6 @@ from geometry_msgs.msg import Point, Wrench, Vector3
 global uav_name
 uav_name = "uav1"
 
-def armAll():
-    rospy.loginfo('arming')
-    rospy.ServiceProxy('/' + uav_name + '/mavros/cmd/arming', CommandBool)
-    rospy.ServiceProxy('/uav2/mavros/cmd/arming', CommandBool)
-    rospy.ServiceProxy('/uav3/mavros/cmd/arming', CommandBool)
-    rospy.ServiceProxy('/uav4/mavros/cmd/arming', CommandBool)
-    rospy.ServiceProxy('/uav5/mavros/cmd/arming', CommandBool)
-    rospy.ServiceProxy('/uav6/mavros/cmd/arming', CommandBool)
-
-def activateAll():
-    rospy.loginfo('activating')
-    rospy.ServiceProxy('/' + uav_name + '/uav_manager/midair_activation', Trigger)
-    rospy.ServiceProxy('/uav2/uav_manager/midair_activation', Trigger)
-    rospy.ServiceProxy('/uav3/uav_manager/midair_activation', Trigger)
-    rospy.ServiceProxy('/uav4/uav_manager/midair_activation', Trigger)
-    rospy.ServiceProxy('/uav5/uav_manager/midair_activation', Trigger)
-    rospy.ServiceProxy('/uav6/uav_manager/midair_activation', Trigger)
-
 class Activator:
     def callback(self, data):
         body_name = uav_name + '::base_link'
