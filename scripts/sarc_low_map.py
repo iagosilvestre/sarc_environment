@@ -149,6 +149,7 @@ def sarc_low_map():
           <frame_to_follow>uav1</frame_to_follow>\n\
         </plugin>\n\
     \n\
+        <plugin name='spawn_buoy' filename='libspawn_buoy.so'/>\n\
     </world>\n\
   </sdf>\n"
 
