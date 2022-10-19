@@ -55,6 +55,17 @@ my_number_string(S) :- my_number(N)
       !follow_trajectory(0).
 
 
++landing_x(LX) 
+   <- .print("Landing Position x: ", LX);
+      //.wait(100);
+      //execute "update_topic2" upon "roscore1". Such action is translated to rostopic pub in MyDemoDevice class
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
+      
++landing_y(V) 
+   <- .print("Landing Position y: ", LY);
+      //.wait(100);
+      //execute "update_topic2" upon "roscore1". Such action is translated to rostopic pub in MyDemoDevice class
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
 //////////////// Calculating land position
 +!calculate_trajectory
    :  my_number(N)
