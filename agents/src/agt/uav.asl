@@ -5,8 +5,6 @@ num_of_uavs(6).
 camera_range(50).
 std_altitude(20.0).
 std_heading(0.0).
-land_point(-102.0, -111.0).
-//land_point(landing_x(LX),landing_y(LY)).
 land_radius(10.0).
 diff(1).
 
@@ -47,7 +45,7 @@ my_number_string(S) :- my_number(N)
 !start.
 
 +!start
-    <- .wait(100);
+    <- .wait(5000);
       //+land_point(landing_x,landing_y);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
@@ -55,21 +53,25 @@ my_number_string(S) :- my_number(N)
       !follow_trajectory(0).
 
 
-+landing_x(LX) 
-   <- .print("Landing Position x: ", LX);
++landing_x(LAX) 
+   <- .print("Landing Position x: ", LAX);
+      +landingx(LAX).
       //.wait(100);
       //execute "update_topic2" upon "roscore1". Such action is translated to rostopic pub in MyDemoDevice class
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
       
-+landing_y(V) 
-   <- .print("Landing Position y: ", LY);
++landing_y(LAY) 
+   <- .print("Landing Position y: ", LAY);
+      +landingy(LAY).
       //.wait(100);
       //execute "update_topic2" upon "roscore1". Such action is translated to rostopic pub in MyDemoDevice class
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
 //////////////// Calculating land position
 +!calculate_trajectory
    :  my_number(N)
-      & land_point(LX, LY)
+      //& land_point(LX, LY)
+      & landingx (LX)
+      & landingy (LY)
       & land_radius(R)
       & num_of_uavs(NumOfUavs)
       & world_area(H, W, CX, CY)
