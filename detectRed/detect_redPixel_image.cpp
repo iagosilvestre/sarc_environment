@@ -19,7 +19,7 @@ ros::Subscriber subsc[uavQty];
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img){
 
-    int red_pixel = 200;
+    int red_pixel = 220;
     int red_height,red_width;
     //bool red_pixel_found = false;
     int redQty=0;
@@ -50,14 +50,14 @@ void process_image_callback(const sensor_msgs::Image img){
         std::string frame = frameframe.str();
         if (img.header.frame_id==frame){
           //if(red_pixel_found){
-          if(redQty>=150){
+          if(redQty>=15){
           //publica topico uav1 encontrou fogo
           // printf("debug uav 1 detect\n");
-            msg.data = i;
+            msg.data = redQty;
             detect_fire[i].publish(msg);
           }
           else{
-            msg.data = 0;
+            msg.data = redQty;
             //printf("debug uav 1 no fire\n");
             detect_fire[i].publish(msg);
           }

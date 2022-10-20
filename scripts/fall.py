@@ -30,7 +30,7 @@ class Activator:
         body_name5 = 'uav5::base_link'
         body_name6 = 'uav6::base_link'
         wrench = Wrench()
-        force = [3, 3, 3]
+        force = [5, 5, 5]
         wrench.force = Vector3(*force)
         duration = rospy.Duration(15)
         rospy.sleep(15)
@@ -46,7 +46,7 @@ class Activator:
         dele = DeleteModelRequest()
         dele.model_name = "SARckc_floor"
         self.delete(dele)
-        rospy.sleep(0.2)
+        rospy.sleep(0.1)
 
         self.activate1()
         self.activate2()
@@ -65,8 +65,8 @@ class Activator:
         self.apply_wrench(body_name6, 'world', Point(0, 0, 0), wrench, rospy.Time().now(), duration)
         #rospy.signal_shutdown("yes")
 
-        x_pub=rospy.Publisher ('/landing_x', Float64,queue_size=10)
-        y_pub=rospy.Publisher ('/landing_y', Float64,queue_size=10)
+        x_pub=rospy.Publisher ('/landing_x', Float64)
+        y_pub=rospy.Publisher ('/landing_y', Float64)
 
         rospy.wait_for_service ('/gazebo/get_link_state')
         get_link_srv = rospy.ServiceProxy('/gazebo/get_link_state', GetLinkState)

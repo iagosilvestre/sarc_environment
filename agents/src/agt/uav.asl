@@ -47,31 +47,19 @@ my_number_string(S) :- my_number(N)
 +!start
     <- .wait(10000);
       //+land_point(landing_x,landing_y);
-      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 10.0]);
       .print("Started!");
       !calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
       !follow_trajectory(0).
 
 
-+landing_x(LAX) 
-   <- .print("Landing Position x: ", LAX);
-      +landingx(LAX).
-      //.wait(100);
-      //execute "update_topic2" upon "roscore1". Such action is translated to rostopic pub in MyDemoDevice class
-      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
-      
-+landing_y(LAY) 
-   <- .print("Landing Position y: ", LAY);
-      +landingy(LAY).
-      //.wait(100);
-      //execute "update_topic2" upon "roscore1". Such action is translated to rostopic pub in MyDemoDevice class
-      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","update_value2", V+1 ).
+
 //////////////// Calculating land position
 +!calculate_trajectory
    :  my_number(N)
       //& land_point(LX, LY)
-      & landingx (LX)
-      & landingy (LY)
+      & landing_x (LX)
+      & landing_y (LY)
       & land_radius(R)
       & num_of_uavs(NumOfUavs)
       & world_area(H, W, CX, CY)
@@ -150,8 +138,7 @@ my_number_string(S) :- my_number(N)
       & my_landing_position(LX, LY)
       & .count(finished_trajectory(_), C)
       & num_of_uavs(C)
-   <- -+status("waiting");
-      .print("All finished, going to land position");
+   <- .print("All finished, going to land position");
       !goto_landing_position(LX, LY).
 
 +!wait_for_others
@@ -231,6 +218,7 @@ my_number_string(S) :- my_number(N)
 +!combat_fire
    : current_position(CX, CY, CZ)
    <- .wait(10000);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 10.0]);
       +fire_extinguished;
       .resume(wait_for_others);
       .print("Fire extinguished. Resuming waiting").
@@ -239,7 +227,7 @@ my_number_string(S) :- my_number(N)
 +!combat_fireR(CW)
    : current_position(CX, CY, CZ)
    <- .wait(10000);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, CZ]);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 10.0]);
       +fire_extinguished;
       .resume(follow_trajectory(CW));
       .print("Fire extinguished. Resuming trajectory").      
