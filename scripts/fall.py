@@ -76,7 +76,7 @@ class Activator:
 
         link = GetLinkStateRequest()
         link.link_name='SARclandArea::link'
-        r = rospy.Rate(1)
+        r = rospy.Rate(2)
 
 
         while not rospy.is_shutdown():
