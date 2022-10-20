@@ -50,14 +50,14 @@ void process_image_callback(const sensor_msgs::Image img){
         std::string frame = frameframe.str();
         if (img.header.frame_id==frame){
           //if(red_pixel_found){
-          if(redQty>=15){
+          if(redQty>=50){
           //publica topico uav1 encontrou fogo
           // printf("debug uav 1 detect\n");
-            msg.data = redQty;
+            msg.data = i;
             detect_fire[i].publish(msg);
           }
           else{
-            msg.data = redQty;
+            msg.data = 0;
             //printf("debug uav 1 no fire\n");
             detect_fire[i].publish(msg);
           }

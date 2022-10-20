@@ -30,9 +30,9 @@ class Activator:
         body_name5 = 'uav5::base_link'
         body_name6 = 'uav6::base_link'
         wrench = Wrench()
-        force = [5, 5, 5]
+        force = [2, 2, 2]
         wrench.force = Vector3(*force)
-        duration = rospy.Duration(15)
+        duration = rospy.Duration(30)
         rospy.sleep(15)
 
         self.arm1(1)
@@ -46,7 +46,7 @@ class Activator:
         dele = DeleteModelRequest()
         dele.model_name = "SARckc_floor"
         self.delete(dele)
-        rospy.sleep(0.1)
+        rospy.sleep(0.2)
 
         self.activate1()
         self.activate2()
