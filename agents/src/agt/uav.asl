@@ -45,7 +45,7 @@ my_number_string(S) :- my_number(N)
 !start.
 
 +!start
-    <- .wait(5000);
+    <- .wait(10000);
       //+land_point(landing_x,landing_y);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
