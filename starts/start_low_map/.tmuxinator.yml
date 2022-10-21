@@ -1,7 +1,7 @@
 name: simulation
 root: ./
 startup_window: status
-pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=t650; export WORLD_NAME=simulation; export SENSORS="garmin_down"
+pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=f450; export WORLD_NAME=simulation; export SENSORS="garmin_down"
 windows:
   - roscore:
       layout: tiled
@@ -20,7 +20,7 @@ windows:
   - status:
       layout: tiled
       panes:
-        - waitForSimulation; roslaunch mrs_uav_status status.launch
+        #- waitForSimulation; roslaunch mrs_uav_status status.launch
   - spawn:
       layout: tiled
       panes:
@@ -39,7 +39,7 @@ windows:
   - control:
       layout: tiled
       panes:
-        - export UAV_NAME=uav1; waitForOdometry; rosservice call /$UAV_NAME/control_manager/set_min_height 15; roslaunch mrs_uav_general core.launch
+        - export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch
           #rosservice call /gazebo/set_model_state '{model_name: uav1, pose: { position: { x: 1.5, y: 0.0, z: 98.6 }, orientation: {x: 0, y: 0.0, z: 0, w: 0.0 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular: { x: 0, y: 0, z: 0}  }, reference_frame: world }'
           #rosservice call set model state
         - export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch
@@ -51,7 +51,14 @@ windows:
       layout: tiled
       panes:
        # uav 1
-        - waitForSimulation; sleep 40; rosrun sarc_environment fall.py
+        - waitForSimulation; sleep 10; rosrun sarc_environment fall.py;
+          rosservice call /uav1/control_manager/set_min_height 11;
+          rosservice call /uav2/control_manager/set_min_height 12;
+          rosservice call /uav3/control_manager/set_min_height 13;
+          rosservice call /uav4/control_manager/set_min_height 14;
+          rosservice call /uav5/control_manager/set_min_height 15;
+          rosservice call /uav6/control_manager/set_min_height 16;
+          rosrun sarc_environment landing.py
         # uav 2
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall2.py
         # uav 3
@@ -62,7 +69,7 @@ windows:
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall5.py
         # uav 6
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall6.py
-        #rosservice call /$UAV_NAME/control_manager/set_min_height 15
+        #rosservice call /uav1/control_manager/set_min_height 15
         #rosservice call /$UAV_NAME/control_manager/goto_altitude 15
         #waitForRos; rosrun sarc_environment fall.py
         # uav 1

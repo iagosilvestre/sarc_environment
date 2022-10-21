@@ -19,12 +19,12 @@ ros::Subscriber subsc[uavQty];
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img){
 
-    int red_pixel = 220;
+    //int red_pixel = 220;
     int red_height,red_width;
     //bool red_pixel_found = false;
-    int redQty=0;
+    unsigned int redQty=0;
     // ros::Publisher wuav5_detect = n.advertise<std_msgs::String>("wuav5_detect", 10);
-    ros::Rate loop_rate(2);
+    ros::Rate loop_rate(10);
     std_msgs::Int8 msg;
 
 
@@ -32,7 +32,7 @@ void process_image_callback(const sensor_msgs::Image img){
     int uav_column;
     for(int i = 0; i < img.height; i++){
         for(int j = 0; j < img.width; j++){
-            if(img.data[i*img.step + j*3] >= 200 && img.data[i*img.step + j*3 + 1] <= 60 && img.data[i*img.step + j*3 + 2] <= 60 ){
+            if(img.data[i*img.step + j*3] >= 200 && img.data[i*img.step + j*3 + 1] <= 30 && img.data[i*img.step + j*3 + 2] <= 30 ){
                 //red_pixel_found = true;
                 redQty+=1;
                 red_height = i;
@@ -78,7 +78,7 @@ int main(int argc, char** argv){
 		std::string s = ss.str();
 		std::string df = dfdf.str();
     std::string sub = subsub.str();
-		detect_fire[i] = n.advertise<std_msgs::Int8>(df, 2);
+		detect_fire[i] = n.advertise<std_msgs::Int8>(df, 10);
 		//landPos[i]=n.advertise<std_msgs::String>(s, 10);
     // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
     subsc[i] = n.subscribe(sub, 10, process_image_callback);

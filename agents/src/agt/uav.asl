@@ -45,19 +45,16 @@ my_number_string(S) :- my_number(N)
 !start.
 
 +!start
-    <- .wait(5000);
-      //+land_point(landing_x,landing_y);
-      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 10.0]);
+    <- .wait(3000);
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
       !calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
       !follow_trajectory(0).
 
 
-
 //////////////// Calculating land position
 +!calculate_trajectory
    :  my_number(N)
-      //& land_point(LX, LY)
       & landing_x (LX)
       & landing_y (LY)
       & land_radius(R)
@@ -218,7 +215,6 @@ my_number_string(S) :- my_number(N)
 +!combat_fire
    : current_position(CX, CY, CZ)
    <- .wait(10000);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 10.0]);
       +fire_extinguished;
       .resume(wait_for_others);
       .print("Fire extinguished. Resuming waiting").
@@ -227,7 +223,7 @@ my_number_string(S) :- my_number(N)
 +!combat_fireR(CW)
    : current_position(CX, CY, CZ)
    <- .wait(10000);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 10.0]);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, CZ]);
       +fire_extinguished;
       .resume(follow_trajectory(CW));
       .print("Fire extinguished. Resuming trajectory").      
