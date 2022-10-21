@@ -53,6 +53,7 @@ my_number_string(S) :- my_number(N)
 
 
 //////////////// Calculating land position
+
 +!calculate_trajectory
    :  my_number(N)
       & landing_x (LX)
@@ -66,7 +67,7 @@ my_number_string(S) :- my_number(N)
       LndRectangleHeight = R/2;
       LndRectangleWidth = R/LndNumOfColumns;
       My_landing_x = LX - R/2 + LndRectangleWidth/2 + ((N-1) mod LndNumOfColumns)*LndRectangleWidth;
-      My_landing_y = LY - R/2 + LndRectangleHeight/2 + (math.floor((N-1)/LNumOfColumns))*LndRectangleHeight;
+      My_landing_y = LY - R/2 + LndRectangleHeight/2 + (math.floor((N-1)/LndNumOfColumns))*LndRectangleHeight;
       +my_landing_position(My_landing_x, My_landing_y);
       //////////////// Calculating area
       .print("Calculating area");
@@ -132,12 +133,11 @@ my_number_string(S) :- my_number(N)
 //////////////// Waiting
 +!wait_for_others
    :  my_number(N)
-      & my_landing_position(LX, LY)
+      & my_landing_position(LAX, LAY)
       & .count(finished_trajectory(_), C)
       & num_of_uavs(C)
-   <- -+status("waiting");
-      .print("All finished, going to land position");
-      !goto_landing_position(LX, LY).
+   <- .print("All finished, going to land position");
+      !goto_landing_position(LAX, LAY).
 
 +!wait_for_others
    <- -+status("waiting");

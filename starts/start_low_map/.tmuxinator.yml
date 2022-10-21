@@ -52,12 +52,6 @@ windows:
       panes:
        # uav 1
         - waitForSimulation; sleep 10; rosrun sarc_environment fall.py;
-          rosservice call /uav1/control_manager/set_min_height 11;
-          rosservice call /uav2/control_manager/set_min_height 12;
-          rosservice call /uav3/control_manager/set_min_height 13;
-          rosservice call /uav4/control_manager/set_min_height 14;
-          rosservice call /uav5/control_manager/set_min_height 15;
-          rosservice call /uav6/control_manager/set_min_height 16;
           rosrun sarc_environment landing.py
         # uav 2
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall2.py
