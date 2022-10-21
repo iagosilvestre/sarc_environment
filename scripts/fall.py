@@ -32,7 +32,7 @@ class Activator:
         wrench = Wrench()
         force = [2, 2, 2]
         wrench.force = Vector3(*force)
-        duration = rospy.Duration(30)
+        duration = rospy.Duration(10)
         rospy.sleep(15)
 
         self.arm1(1)

@@ -1,7 +1,7 @@
 name: simulation
 root: ./
 startup_window: status
-pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=f450; export WORLD_NAME=simulation; export SENSORS="garmin_down"
+pre_window: export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=t650; export WORLD_NAME=simulation; export SENSORS="garmin_down"
 windows:
   - roscore:
       layout: tiled
@@ -39,7 +39,7 @@ windows:
   - control:
       layout: tiled
       panes:
-        - export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch
+        - export UAV_NAME=uav1; waitForOdometry; rosservice call /$UAV_NAME/control_manager/set_min_height 15; roslaunch mrs_uav_general core.launch
           #rosservice call /gazebo/set_model_state '{model_name: uav1, pose: { position: { x: 1.5, y: 0.0, z: 98.6 }, orientation: {x: 0, y: 0.0, z: 0, w: 0.0 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular: { x: 0, y: 0, z: 0}  }, reference_frame: world }'
           #rosservice call set model state
         - export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch

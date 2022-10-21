@@ -24,7 +24,7 @@ void process_image_callback(const sensor_msgs::Image img){
     //bool red_pixel_found = false;
     int redQty=0;
     // ros::Publisher wuav5_detect = n.advertise<std_msgs::String>("wuav5_detect", 10);
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(2);
     std_msgs::Int8 msg;
 
 
@@ -50,7 +50,7 @@ void process_image_callback(const sensor_msgs::Image img){
         std::string frame = frameframe.str();
         if (img.header.frame_id==frame){
           //if(red_pixel_found){
-          if(redQty>=50){
+          if(redQty>=30){
           //publica topico uav1 encontrou fogo
           // printf("debug uav 1 detect\n");
             msg.data = i;
@@ -78,7 +78,7 @@ int main(int argc, char** argv){
 		std::string s = ss.str();
 		std::string df = dfdf.str();
     std::string sub = subsub.str();
-		detect_fire[i] = n.advertise<std_msgs::Int8>(df, 10);
+		detect_fire[i] = n.advertise<std_msgs::Int8>(df, 2);
 		//landPos[i]=n.advertise<std_msgs::String>(s, 10);
     // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
     subsc[i] = n.subscribe(sub, 10, process_image_callback);
