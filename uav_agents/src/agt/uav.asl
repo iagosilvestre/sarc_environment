@@ -2,7 +2,7 @@
 status("None").
 world_area(250, 250, 0, 0).
 num_of_uavs(6).
-camera_range(50).
+camera_range(10).
 std_altitude(20.0).
 std_heading(0.0).
 land_point(-102.0, -111.0).
@@ -216,7 +216,7 @@ my_number_string(S) :- my_number(N)
 +!combat_fire
    : current_position(CX, CY, CZ)
    <- .wait(10000);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 10.0]);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 8.0]);
       +fire_extinguished;
       .resume(wait_for_others);
       .print("Fire extinguished. Resuming waiting").
@@ -225,7 +225,7 @@ my_number_string(S) :- my_number(N)
 +!combat_fireR(CW)
    : current_position(CX, CY, CZ)
    <- .wait(10000);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 10.0]);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[CX, CY, 8.0]);
       +fire_extinguished;
       .resume(follow_trajectory(CW));
       .print("Fire extinguished. Resuming trajectory").      
