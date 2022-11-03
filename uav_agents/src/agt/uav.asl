@@ -45,7 +45,7 @@ my_number_string(S) :- my_number(N)
 !start.
 
 +!start
-    <- .wait(3000);
+    <- .wait(5000);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
       !calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
