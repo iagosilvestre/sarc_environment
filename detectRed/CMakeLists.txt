@@ -1,6 +1,15 @@
-cmake_minimum_required(VERSION 2.8.3)
-project(myproject)
+cmake_minimum_required(VERSION 3.0.2)
+project(detectRed)
 
+## Compile as C++11, supported in ROS Kinetic and newer
+# add_compile_options(-std=c++11)
+
+## Find catkin macros and libraries
+## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
+## is used, also find other catkin packages
+find_package(catkin REQUIRED COMPONENTS
+  sarc_environment
+)
 # Build the talker and listener. Each one uses the following ROS packages,
 # which we need to find_package() individually:
 #   roscpp (the client library)
@@ -20,4 +29,3 @@ target_link_libraries(detect_redPixel_image ${roscpp_LIBRARIES} ${std_msgs_LIBRA
 # (optional) Install the executables.
 install(TARGETS detect_redPixel_image
         DESTINATION bin)
-

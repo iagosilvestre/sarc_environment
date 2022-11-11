@@ -1,3 +1,0 @@
-cd build/
-make
-./detect_redPixel_image

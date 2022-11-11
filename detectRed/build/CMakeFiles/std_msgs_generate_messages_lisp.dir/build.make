@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed
+CMAKE_SOURCE_DIR = /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed/build
+CMAKE_BINARY_DIR = /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed/build
 
 # Utility rule file for std_msgs_generate_messages_lisp.
 
@@ -67,6 +67,6 @@ CMakeFiles/std_msgs_generate_messages_lisp.dir/clean:
 .PHONY : CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 
 CMakeFiles/std_msgs_generate_messages_lisp.dir/depend:
-	cd /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed/build /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed/build /home/ctc_das/mrs_workspace/src/sarc_environment/detectRed/build/CMakeFiles/std_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed/build /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed/build /home/ctc_das/mrs_workspace/src/sarc_environment/ros_packages/detectRed/build/CMakeFiles/std_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/std_msgs_generate_messages_lisp.dir/depend
 
