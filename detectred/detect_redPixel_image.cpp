@@ -67,7 +67,7 @@ void process_image_callback(const sensor_msgs::Image img){
 }
 int main(int argc, char** argv){
 	// Initialize the process_image node and create a handle to it
-	ros::init(argc, argv, "process_image");
+	ros::init(argc, argv, "pi");
 	ros::NodeHandle n;
 
 	for(int i=1;i<=uavQty;i++){ //Rotina para criar topicos que contem a posicao de pouso respectiva para cada drone
