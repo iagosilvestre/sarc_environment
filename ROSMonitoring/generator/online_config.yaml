@@ -1,8 +1,8 @@
 nodes: # here we list the nodes we are going to monitor
   - node:
-      name: process_image
-      package: detectRed
-      path: /home/ctc_das/mrs_workspace/src/sarc_environment/launch/detectRed.launch
+      name: pi
+      package: detectred
+      path: /home/ctc_das/mrs_workspace/src/sarc_environment/launch/detectred.launch
 
 
 monitors: # here we list the monitors we are going to generate
@@ -17,6 +17,32 @@ monitors: # here we list the monitors we are going to generate
       topics: # the list of topics this monitor is going to intercept
         - name: detect_fire_uav1 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: filter
+          action: log
           publishers:
-           - process_image
+           - pi
+        - name: detect_fire_uav2 # name of the topic
+          type: std_msgs.msg.Int8 # type of the topic
+          action: log
+          publishers:
+           - pi
+        - name: detect_fire_uav3 # name of the topic
+          type: std_msgs.msg.Int8 # type of the topic
+          action: log
+          publishers:
+           - pi
+        - name: detect_fire_uav4 # name of the topic
+          type: std_msgs.msg.Int8 # type of the topic
+          action: log
+          publishers:
+           - pi
+        - name: detect_fire_uav5 # name of the topic
+          type: std_msgs.msg.Int8 # type of the topic
+          action: log
+          publishers:
+           - pi
+        - name: detect_fire_uav6 # name of the topic
+          type: std_msgs.msg.Int8 # type of the topic
+          action: log
+          publishers:
+           - pi
+     

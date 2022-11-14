@@ -10,10 +10,8 @@ from monitor.msg import *
 from std_msgs.msg import String
 
 ws_lock = Lock()
-dict_msgs = {}
 from std_msgs.msg import Int8
 
-pubdetect_fire_uav1 = rospy.Publisher(name = 'detect_fire_uav1', data_class = Int8, latch = True, queue_size = 1000)
 def callbackdetect_fire_uav1(data):
 	global ws, ws_lock
 	rospy.loginfo('monitor has observed: ' + str(data))
@@ -21,13 +19,10 @@ def callbackdetect_fire_uav1(data):
 	dict['topic'] = 'detect_fire_uav1'
 	dict['time'] = rospy.get_time()
 	ws_lock.acquire()
-	while dict['time'] in dict_msgs:
-		dict['time'] += 0.01
-	ws.send(json.dumps(dict))
-	dict_msgs[dict['time']] = data
+	logging(dict)
 	ws_lock.release()
-	rospy.loginfo('event propagated to oracle')
-pub_dict = { 'detect_fire_uav1' : pubdetect_fire_uav1}
+	rospy.loginfo('event has been successfully logged')
+pub_dict = {}
 msg_dict = { 'detect_fire_uav1' : "std_msgs/Int8"}
 def monitor():
 	global pub_error, pub_verdict
@@ -36,55 +31,8 @@ def monitor():
 	rospy.init_node('monitor_0', anonymous=True)
 	pub_error = rospy.Publisher(name = 'monitor_0/monitor_error', data_class = MonitorError, latch = True, queue_size = 1000)
 	pub_verdict = rospy.Publisher(name = 'monitor_0/monitor_verdict', data_class = String, latch = True, queue_size = 1000)
-	rospy.Subscriber('detect_fire_uav1_mon', Int8, callbackdetect_fire_uav1)
+	rospy.Subscriber('detect_fire_uav1', Int8, callbackdetect_fire_uav1)
 	rospy.loginfo('monitor started and ready')
-def on_message(ws, message):
-	global error, log, actions
-	json_dict = json.loads(message)
-	if json_dict['verdict'] == 'true' or json_dict['verdict'] == 'currently_true' or json_dict['verdict'] == 'unknown':
-		if json_dict['verdict'] == 'true' and not pub_dict:
-			rospy.loginfo('The monitor concluded the satisfaction of the property under analysis, and can be safely removed.')
-			ws.close()
-			exit(0)
-		else:
-			logging(json_dict)
-			topic = json_dict['topic']
-			rospy.loginfo('The event ' + message + ' is consistent and republished')
-			if topic in pub_dict:
-				pub_dict[topic].publish(dict_msgs[json_dict['time']])
-			del dict_msgs[json_dict['time']]
-	else:
-		logging(json_dict)
-		if (json_dict['verdict'] == 'false' and actions[json_dict['topic']][1] >= 1) or (json_dict['verdict'] == 'currently_false' and actions[json_dict['topic']][1] == 1):
-			rospy.loginfo('The event ' + message + ' is inconsistent..')
-			error = MonitorError()
-			error.topic = json_dict['topic']
-			error.time = json_dict['time']
-			error.property = json_dict['spec']
-			error.content = str(dict_msgs[json_dict['time']])
-			pub_error.publish(error)
-			if json_dict['verdict'] == 'false' and not pub_dict:
-				rospy.loginfo('The monitor concluded the violation of the property under analysis, and can be safely removed.')
-				ws.close()
-				exit(0)
-		if actions[json_dict['topic']][0] != 'filter':
-			if json_dict['verdict'] == 'currently_false':
-				rospy.loginfo('The event ' + message + ' is consistent ')
-			topic = json_dict['topic']
-			if topic in pub_dict:
-				pub_dict[topic].publish(dict_msgs[json_dict['time']])
-			del dict_msgs[json_dict['time']]
-		error = True
-	pub_verdict.publish(json_dict['verdict'])
-
-def on_error(ws, error):
-	rospy.loginfo(error)
-
-def on_close(ws):
-	rospy.loginfo('### websocket closed ###')
-
-def on_open(ws):
-	rospy.loginfo('### websocket is open ###')
 
 def logging(json_dict):
 	try:
@@ -98,18 +46,10 @@ def main(argv):
 	global log, actions, ws
 	log = '/home/ctc_das/mrs_workspace/src/log.txt' 
 	actions = {
-		'detect_fire_uav1' : ('filter', 0)
+		'detect_fire_uav1' : ('log', 0)
 	}
 	monitor()
-	websocket.enableTrace(False)
-	ws = websocket.WebSocketApp(
-		'ws://127.0.0.1:8080',
-		on_message = on_message,
-            
-		on_error = on_error,
-		on_close = on_close,
-		on_open = on_open)
-	ws.run_forever()
+	rospy.spin()
 
 if __name__ == '__main__':
 	main(sys.argv)

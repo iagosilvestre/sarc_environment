@@ -1,6 +1,6 @@
 <launch>
   <node
-    pkg="detectRed"
+    pkg="detectred"
     type="detect_redPixel_image"
     name="detect_redPixel_image" 
     output="screen"
