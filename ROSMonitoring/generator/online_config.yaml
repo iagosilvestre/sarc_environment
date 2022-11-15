@@ -3,13 +3,11 @@ nodes: # here we list the nodes we are going to monitor
       name: pi
       package: detectred
       path: /home/ctc_das/mrs_workspace/src/sarc_environment/launch/detectred.launch
-
-
 monitors: # here we list the monitors we are going to generate
   - monitor:
       id: monitor_0
       log: /home/ctc_das/mrs_workspace/src/log.txt # file where the monitor will log the observed events
-      silent: False # we let the monitor to print info during its execution
+      silent: True # we let the monitor to print info during its execution
       oracle: # the oracle running and ready to check the specification (localhost in this case)
         port: 8080 # the port where it is listening
         url: 127.0.0.1 # the url where it is listening
@@ -17,32 +15,32 @@ monitors: # here we list the monitors we are going to generate
       topics: # the list of topics this monitor is going to intercept
         - name: detect_fire_uav1 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: log
-          publishers:
+          action: filter
+          subscribers:
            - pi
         - name: detect_fire_uav2 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: log
-          publishers:
+          action: filter
+          subscribers:
            - pi
         - name: detect_fire_uav3 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: log
-          publishers:
+          action: filter
+          subscribers:
            - pi
         - name: detect_fire_uav4 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: log
-          publishers:
+          action: filter
+          subscribers:
            - pi
         - name: detect_fire_uav5 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: log
-          publishers:
+          action: filter
+          subscribers:
            - pi
         - name: detect_fire_uav6 # name of the topic
           type: std_msgs.msg.Int8 # type of the topic
-          action: log
-          publishers:
+          action: filter
+          subscribers:
            - pi
      
