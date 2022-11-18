@@ -1,0 +1,17 @@
+name: ROSMonitoring
+root: ./
+startup_window: server
+pre_window: #export UAV_NAME=uav1; export WORLD_FILE=./world.yaml; export RUN_TYPE=simulation; export UAV_TYPE=f450; export WORLD_NAME=simulation; export SENSORS="garmin_down"
+windows:
+  - server:
+      layout: tiled
+      panes:
+        - sh online_monitor.sh ../rml/test.pl 8080
+  - monitors:
+      layout: tiled
+      panes:
+        - waitForRos; roslaunch rosbridge_server rosbridge_websocket.launch
+  - detectRed:
+      layout: tiled
+      panes:
+        - waitForRos; roslaunch sarc_environment sarc.launch

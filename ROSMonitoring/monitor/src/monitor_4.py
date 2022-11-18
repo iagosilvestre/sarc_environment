@@ -13,11 +13,11 @@ ws_lock = Lock()
 dict_msgs = {}
 from std_msgs.msg import Int8
 
-pubdetect_fire_uav1 = rospy.Publisher(name = 'detect_fire_uav1_mon', data_class = Int8, latch = True, queue_size = 1000)
-def callbackdetect_fire_uav1(data):
+pubdetect_fire_uav4 = rospy.Publisher(name = 'detect_fire_uav4_mon', data_class = Int8, latch = True, queue_size = 1000)
+def callbackdetect_fire_uav4(data):
 	global ws, ws_lock
 	dict = message_converter.convert_ros_message_to_dictionary(data)
-	dict['topic'] = 'detect_fire_uav1'
+	dict['topic'] = 'detect_fire_uav4'
 	dict['time'] = rospy.get_time()
 	ws_lock.acquire()
 	while dict['time'] in dict_msgs:
@@ -25,16 +25,16 @@ def callbackdetect_fire_uav1(data):
 	ws.send(json.dumps(dict))
 	dict_msgs[dict['time']] = data
 	ws_lock.release()
-pub_dict = { 'detect_fire_uav1' : pubdetect_fire_uav1}
-msg_dict = { 'detect_fire_uav1' : "std_msgs/Int8"}
+pub_dict = { 'detect_fire_uav4' : pubdetect_fire_uav4}
+msg_dict = { 'detect_fire_uav4' : "std_msgs/Int8"}
 def monitor():
 	global pub_error, pub_verdict
 	with open(log, 'w') as log_file:
 		log_file.write('')
-	rospy.init_node('monitor_0', anonymous=True)
-	pub_error = rospy.Publisher(name = 'monitor_0/monitor_error', data_class = MonitorError, latch = True, queue_size = 1000)
-	pub_verdict = rospy.Publisher(name = 'monitor_0/monitor_verdict', data_class = String, latch = True, queue_size = 1000)
-	rospy.Subscriber('detect_fire_uav1', Int8, callbackdetect_fire_uav1)
+	rospy.init_node('monitor_4', anonymous=True)
+	pub_error = rospy.Publisher(name = 'monitor_4/monitor_error', data_class = MonitorError, latch = True, queue_size = 1000)
+	pub_verdict = rospy.Publisher(name = 'monitor_4/monitor_verdict', data_class = String, latch = True, queue_size = 1000)
+	rospy.Subscriber('detect_fire_uav4', Int8, callbackdetect_fire_uav4)
 def on_message(ws, message):
 	global error, log, actions
 	json_dict = json.loads(message)
@@ -90,14 +90,14 @@ def logging(json_dict):
 
 def main(argv):
 	global log, actions, ws
-	log = '/home/ctc_das/mrs_workspace/src/log1.txt' 
+	log = '/home/ctc_das/mrs_workspace/src/log4.txt' 
 	actions = {
-		'detect_fire_uav1' : ('filter', 0)
+		'detect_fire_uav4' : ('filter', 0)
 	}
 	monitor()
 	websocket.enableTrace(False)
 	ws = websocket.WebSocketApp(
-		'ws://127.0.0.1:8080',
+		'ws://127.0.0.1:8083',
 		on_message = on_message,
             
 		on_error = on_error,

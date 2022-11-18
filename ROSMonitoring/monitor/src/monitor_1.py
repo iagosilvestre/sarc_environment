@@ -31,9 +31,9 @@ def monitor():
 	global pub_error, pub_verdict
 	with open(log, 'w') as log_file:
 		log_file.write('')
-	rospy.init_node('monitor_0', anonymous=True)
-	pub_error = rospy.Publisher(name = 'monitor_0/monitor_error', data_class = MonitorError, latch = True, queue_size = 1000)
-	pub_verdict = rospy.Publisher(name = 'monitor_0/monitor_verdict', data_class = String, latch = True, queue_size = 1000)
+	rospy.init_node('monitor_1', anonymous=True)
+	pub_error = rospy.Publisher(name = 'monitor_1/monitor_error', data_class = MonitorError, latch = True, queue_size = 1000)
+	pub_verdict = rospy.Publisher(name = 'monitor_1/monitor_verdict', data_class = String, latch = True, queue_size = 1000)
 	rospy.Subscriber('detect_fire_uav1', Int8, callbackdetect_fire_uav1)
 def on_message(ws, message):
 	global error, log, actions

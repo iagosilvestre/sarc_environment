@@ -1,0 +1,24 @@
+name: ROSMonitoring
+root: ./
+startup_window: server
+pre_window: source ~/mrs_workspace/devel/setup.bash;
+windows:
+  - server:
+      layout: tiled
+      panes:
+        - sh online_monitor.sh ../rml/uav1.pl 8080
+        - sh online_monitor.sh ../rml/uav2.pl 8080
+        - sh online_monitor.sh ../rml/uav3.pl 8080
+        - sh online_monitor.sh ../rml/uav4.pl 8080
+        - sh online_monitor.sh ../rml/uav5.pl 8080
+        - sh online_monitor.sh ../rml/uav6.pl 8080
+  - monitors:
+      layout: tiled
+      panes:
+        - sleep 50;
+          roslaunch src/monitor/run.launch
+  - detectRed:
+      layout: tiled
+      panes:
+        - sleep 100;
+          roslaunch src/sarc_environment/launch/detectred_instrumented.launch
