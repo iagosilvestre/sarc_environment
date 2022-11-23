@@ -17,9 +17,10 @@ windows:
       panes:
         - sleep 10;
           source ~/mrs_workspace/devel/setup.bash;
-          roslaunch src/monitor/run.launch
+          roslaunch ~/mrs_workspace/src/monitor/run.launch
   - detectRed:
       layout: tiled
       panes:
         - sleep 20;
-          roslaunch src/sarc_environment/launch/detectred_instrumented.launch
+          source ~/mrs_workspace/devel/setup.bash;
+          roslaunch ~/mrs_workspace/src/sarc_environment/launch/detectred_instrumented.launch
