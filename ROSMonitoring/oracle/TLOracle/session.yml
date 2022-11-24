@@ -6,12 +6,12 @@ windows:
   - server:
       layout: tiled
       panes:
-        - sh online_monitor.sh ../rml/uav1.pl 8080
-        - sh online_monitor.sh ../rml/uav2.pl 8081
-        - sh online_monitor.sh ../rml/uav3.pl 8082
-        - sh online_monitor.sh ../rml/uav4.pl 8083
-        - sh online_monitor.sh ../rml/uav5.pl 8084
-        - sh online_monitor.sh ../rml/uav6.pl 8085
+        - ./oracle.py --online --property property1 --port 8080 --dense
+        - ./oracle.py --online --property property2 --port 8081 --dense
+        - ./oracle.py --online --property property3 --port 8082 --dense
+        - ./oracle.py --online --property property4 --port 8083 --dense
+        - ./oracle.py --online --property property5 --port 8084 --dense
+        - ./oracle.py --online --property property6 --port 8085 --dense
   - monitors:
       layout: tiled
       panes:

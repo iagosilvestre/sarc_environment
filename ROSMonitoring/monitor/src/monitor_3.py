@@ -92,7 +92,7 @@ def main(argv):
 	global log, actions, ws
 	log = '/home/ctc_das/mrs_workspace/src/log3.txt' 
 	actions = {
-		'detect_fire_uav3' : ('filter', 0)
+		'detect_fire_uav3' : ('log', 2)
 	}
 	monitor()
 	websocket.enableTrace(False)

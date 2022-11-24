@@ -15,12 +15,12 @@ windows:
   - monitors:
       layout: tiled
       panes:
-        - sleep 10;
+        - sleep 2;
           source ~/mrs_workspace/devel/setup.bash;
           roslaunch ~/mrs_workspace/src/monitor/run.launch
   - detectRed:
       layout: tiled
       panes:
-        - sleep 20;
+        - sleep 5;
           source ~/mrs_workspace/devel/setup.bash;
           roslaunch ~/mrs_workspace/src/sarc_environment/launch/detectred_instrumented.launch
