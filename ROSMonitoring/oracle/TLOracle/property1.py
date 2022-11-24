@@ -23,7 +23,7 @@
 import oracle
 
 # property to verify
-PROPERTY = "historically[0:3]{fire}"
+PROPERTY = "historically[0:1]{fire}"
 
 # predicates used in the property (initialization for time 0)
 predicates = dict(

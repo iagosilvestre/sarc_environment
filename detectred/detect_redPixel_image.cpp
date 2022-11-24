@@ -18,7 +18,6 @@ ros::Subscriber subsc[uavQty];
 
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img){
-
     //int red_pixel = 220;
     int red_height,red_width;
     //bool red_pixel_found = false;
@@ -57,7 +56,7 @@ void process_image_callback(const sensor_msgs::Image img){
             detect_fire[i].publish(msg);
           }
           else{
-            msg.data = 0;
+            msg.data = 0;  //0 means no fire
             //printf("debug uav 1 no fire\n");
             detect_fire[i].publish(msg);
           }
