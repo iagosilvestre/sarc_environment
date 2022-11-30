@@ -23,12 +23,12 @@
 import oracle
 
 # property to verify
-PROPERTY = "historically[0:1]{fire}"
+PROPERTY = "historically[0:3]{fire}"
 
 # predicates used in the property (initialization for time 0)
 predicates = dict(
     time = 0,
-    fire = False
+    fire = True
 )
 # in here we can add all the predicates we are interested in.. Of course, we also need to define how to translate Json messages to predicates.
 
