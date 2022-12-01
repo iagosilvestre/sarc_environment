@@ -18,8 +18,8 @@ rospack = rospkg.RosPack()
 rospack.list()
 rospy.init_node('sarc_low_map', anonymous=True)
 rate = rospy.Rate(10) # 10hz
-quant = 3 ## this quantity is this number times 3, since each tree type will have this many replicas
-dronesquant = 6 ## number of drones to spawn, above 5 pay atention in the spawn circle radius
+quant = 5 ## this quantity is this number times 3, since each tree type will have this many replicas
+dronesquant = 1 ## number of drones to spawn, above 5 pay atention in the spawn circle radius
 spawnCircleRadius = 1.30 #original 0.75, posG generated with 1.5 , sarc barinet video made with 1.3
 
 def sarc_low_map():
