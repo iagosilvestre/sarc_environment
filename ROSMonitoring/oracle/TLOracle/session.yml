@@ -6,12 +6,12 @@ windows:
   - server:
       layout: tiled
       panes:
-        - ./oracle.py --online --property property1 --port 8080 --dense
-        - ./oracle.py --online --property property2 --port 8081 --dense
-        - ./oracle.py --online --property property3 --port 8082 --dense
-        - ./oracle.py --online --property property4 --port 8083 --dense
-        - ./oracle.py --online --property property5 --port 8084 --dense
-        - ./oracle.py --online --property property6 --port 8085 --dense
+        - ./oracle.py --online --property property1 --port 8080 --discrete
+        - ./oracle.py --online --property property2 --port 8081 --discrete
+        - ./oracle.py --online --property property3 --port 8082 --discrete
+        - ./oracle.py --online --property property4 --port 8083 --discrete
+        - ./oracle.py --online --property property5 --port 8084 --discrete
+        - ./oracle.py --online --property property6 --port 8085 --discrete
   - monitors:
       layout: tiled
       panes:

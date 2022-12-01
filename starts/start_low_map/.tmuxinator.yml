@@ -27,31 +27,31 @@ windows:
         # uav 1 maybe use same pos for every drone
         - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos1.yaml"
         # uav 2
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos2.yaml"
+        #- waitForSimulation; rosservice call /mrs_drone_spawner/spawn "2 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos2.yaml"
         # uav 3
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "3 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos3.yaml"
+        #- waitForSimulation; rosservice call /mrs_drone_spawner/spawn "3 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos3.yaml"
         # uav 4
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "4 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos4.yaml"
+        #- waitForSimulation; rosservice call /mrs_drone_spawner/spawn "4 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos4.yaml"
         # uav 5
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "5 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos5.yaml"
+        #- waitForSimulation; rosservice call /mrs_drone_spawner/spawn "5 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos5.yaml"
         # uav 6 
-        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn "6 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos6.yaml"
+        #- waitForSimulation; rosservice call /mrs_drone_spawner/spawn "6 $UAV_TYPE --enable-rangefinder --enable_bluefox_camera --enable-ground-truth --pos_file `pwd`/pos/pos6.yaml"
   - control:
       layout: tiled
       panes:
         - export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch
           #rosservice call /gazebo/set_model_state '{model_name: uav1, pose: { position: { x: 1.5, y: 0.0, z: 98.6 }, orientation: {x: 0, y: 0.0, z: 0, w: 0.0 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular: { x: 0, y: 0, z: 0}  }, reference_frame: world }'
           #rosservice call set model state
-        - export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav3; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav4; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav5; waitForOdometry; roslaunch mrs_uav_general core.launch
-        - export UAV_NAME=uav6; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav3; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav4; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav5; waitForOdometry; roslaunch mrs_uav_general core.launch
+        #- export UAV_NAME=uav6; waitForOdometry; roslaunch mrs_uav_general core.launch
   - arming:
       layout: tiled
       panes:
        # uav 1
-        - waitForSimulation; sleep 10; rosrun sarc_environment fall.py;
+        - waitForSimulation; sleep 10; rosrun sarc_environment fall1.py;
           rosrun sarc_environment landing.py
         # uav 2
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall2.py
