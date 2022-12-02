@@ -5,7 +5,21 @@
 An environment for simulating a burning forest, with the intention that teams can demonstrate their work in stage one of the SARC competition.
 
 ## Getting Started
+Copy these two folders to /mrs_workspace/src path
 
+* detectred
+* ROSMonitoring/monitor
+
+Then start the simulation through the following command:
+```
+starts/start_low_map/./start.sh
+```
+
+And then run the ROSMonitoring script, responsible for starting the monitors, the oracle responsible for online verification, and the detectred package, responsible for processing the images from the drones cameras.
+
+```
+ROSMonitoring/oracle/TLOracle/./start.sh
+```
 ### Dependencies
 
 * Ubuntu 20.04
