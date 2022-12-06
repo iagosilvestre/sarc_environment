@@ -11,7 +11,7 @@
   <arg name="verbose" default="true" />
 
     <!-- supply this argument to specify the world name within the sarc_environment package -->
-  <arg name="world_name" default="SARC" />
+  <arg name="world_name" default="SARC1" />
 
     <!-- supply this argument to specity a world file from outside of the sarc_environment package -->
   <arg name="world_file" default="$(find sarc_environment)/worlds/$(arg world_name).world" />
