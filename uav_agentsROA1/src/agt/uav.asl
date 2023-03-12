@@ -169,8 +169,9 @@ my_number_string(S) :- my_number(N)
    :  my_number(N)
       & my_landing_position(LAX, LAY)
       & num_of_uavs(C)
+      & current_position(CX, CY, CZ)
    <- .print("going to land position");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","pubLandingAlt",[N, 1.5]);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","pubLandingAlt",[N, CZ]);
       !goto_landing_position(LAX, LAY).
 
 

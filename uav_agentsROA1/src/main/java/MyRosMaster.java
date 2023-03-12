@@ -52,7 +52,7 @@ public class MyRosMaster extends RosMaster {
 	   }
 	   
 	   if(actionName.equals("pubLandingAlt")){		   
-	      ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/LA1","std_msgs/Float64",""+ args[1]);
+	      ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/LA"+args[0]+"","std_msgs/Float64",""+ args[1]+"");
 		   return true;
 	   }
 
