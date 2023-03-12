@@ -87,7 +87,7 @@ def sarc_map():
               <geometry>\n\
                 <plane>\n\
                   <normal>0 0 1</normal>\n\
-                  <size>250 250</size>\n\
+                  <size>50 50</size>\n\
                 </plane>\n\
               </geometry>\n\
               <surface>\n\

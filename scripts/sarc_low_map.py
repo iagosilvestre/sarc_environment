@@ -87,7 +87,7 @@ def sarc_low_map():
               <geometry>\n\
                 <plane>\n\
                   <normal>0 0 1</normal>\n\
-                  <size>250 250</size>\n\
+                  <size>50 50</size>\n\
                 </plane>\n\
               </geometry>\n\
               <surface>\n\
@@ -153,7 +153,7 @@ def sarc_low_map():
     </world>\n\
   </sdf>\n"
 
-  someX, someY = 125, 125
+  someX, someY = 50, 50
   fig,ax = plt.subplots()
   currentAxis = plt.gca()
   currentAxis.add_patch(Rectangle((someX - 0.1, someY - 0.1), 0.2, 0.2,
@@ -279,7 +279,7 @@ def sarc_low_map():
           # print('y recalculated: %d' % yfire)
       else:
           y1[i] = yfire
-      f.write(insertFireTree(xfire, yfire, i))
+      #f.write(insertFireTree(xfire, yfire, i))
       # print(y1[i])
 
   # generate close area
@@ -308,7 +308,7 @@ def sarc_low_map():
           # print('y recalculated: %d' % yclose)
       else:
           y2[i] = yclose 
-      f.write(insertCloseTree(xclose, yclose, i))
+      #f.write(insertCloseTree(xclose, yclose, i))
       # print(y2[i])
 
   # generate not affected area
@@ -337,7 +337,7 @@ def sarc_low_map():
           # print('y recalculated: %d' % ytree)
       else:
           y3[i] = ytree
-      f.write(insertTree(xtree, ytree, i))
+      #f.write(insertTree(xtree, ytree, i))
       # print(y3[i])
       
   def checkSafeX(i):

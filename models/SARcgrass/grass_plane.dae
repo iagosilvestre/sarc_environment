@@ -59,10 +59,10 @@
       <mesh>
         <source id="Plane002-POSITION">
           <float_array id="Plane002-POSITION-array" count="12">
--125000.0 -125000.0 0.0
-125000.0 -125000.0 0.0
--125000.0 125000.0 0.0
-125000.0 125000.0 0.0
+-55000.0 -55000.0 0.0
+55000.0 -55000.0 0.0
+-55000.0 55000.0 0.0
+55000.0 55000.0 0.0
 </float_array>
           <technique_common>
             <accessor source="#Plane002-POSITION-array" count="4" stride="3">
