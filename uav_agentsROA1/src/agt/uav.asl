@@ -47,6 +47,7 @@ my_number_string(S) :- my_number(N)
     <- .wait(5000);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","pubLandingAlt",[1, 1]);
       !calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
       //!follow_trajectory(0).
       !goto_landing.
@@ -168,10 +169,7 @@ my_number_string(S) :- my_number(N)
 +!goto_landing
    :  my_number(N)
       & my_landing_position(LAX, LAY)
-      & num_of_uavs(C)
-      & current_position(CX, CY, CZ)
    <- .print("going to land position");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","pubLandingAlt",[N, CZ]);
       !goto_landing_position(LAX, LAY).
 
 

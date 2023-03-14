@@ -24,8 +24,8 @@ class Landing:
     def callback(self, data):
         x_pub=rospy.Publisher ('/landing_x', Float64)
         y_pub=rospy.Publisher ('/landing_y', Float64)
-        uav1_pub=rospy.Publisher ('/LA1', Float64)
-        uav2_pub=rospy.Publisher ('/LA2', Float64)
+        uav1_pub=rospy.Publisher ('/LA1', Float64, queue_size=10, latch=True)
+        uav2_pub=rospy.Publisher ('/LA2', Float64, queue_size=10, latch=True)
 
         rospy.wait_for_service ('/gazebo/get_link_state')
         get_link_srv = rospy.ServiceProxy('/gazebo/get_link_state', GetLinkState)
@@ -36,14 +36,11 @@ class Landing:
         link = GetLinkStateRequest()
         link.link_name='SARclandArea::link'
         r = rospy.Rate(2)
-
-
         while not rospy.is_shutdown():
             result = get_link_srv(link)
 
             xland.data = result.link_state.pose.position.x
             yland.data = result.link_state.pose.position.y
-
             #print(xland)
             #print(yland)
             x_pub.publish (xland)

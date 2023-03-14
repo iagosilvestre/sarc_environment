@@ -47,14 +47,19 @@ public class MyRosMaster extends RosMaster {
 	
 		
 		if(actionName.equals("drop")){		   
-	      ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/rescue_world/drop_buoy","geometry_msgs/Pose","{\"position\": {\"x\": "+args[0]+", \"y\": "+args[1]+", \"z\": "+args[2]+"},\"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0, \"w\": 99.0}}");
+	    	 ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/rescue_world/drop_buoy","geometry_msgs/Pose","{\"position\": {\"x\": "+args[0]+", \"y\": "+args[1]+", \"z\": "+args[2]+"},\"orientation\": {\"x\": 0.0, \"y\": 0.0, \"z\": 0.0, \"w\": 99.0}}");
 		   return true;
-	   }
+	   	}
 	   
-	   if(actionName.equals("pubLandingAlt")){		   
-	      ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/LA"+args[0]+"","std_msgs/Float64",""+ args[1]+"");
+	   	if(actionName.equals("pubLandingAltBackup")){		   
+	     	 ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/LA"+args[0],"std_msgs/Float64",(String)args[1]);
 		   return true;
-	   }
+	   	}
+	   	if(actionName.equals("pubLandingAlt")){		   
+	     	 ((DefaultRos4EmbeddedMas) microcontroller).rosWrite("/LA1","std_msgs/Float64","1.1");
+		   return true;
+	   	}
+	   
 
 		if(actionName.equals("goto")){ 
 			ServiceParameters p = new ServiceParameters(); //p is the set of parameters of the requested service		  
@@ -74,5 +79,6 @@ public class MyRosMaster extends RosMaster {
 		return false;
 
 	}
+	
 	
 }

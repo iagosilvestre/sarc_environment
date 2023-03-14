@@ -113,7 +113,7 @@
         </model>
 			<model name='SARclandArea'>
           <include>
-            <pose>50 -50 0.02 0 0 0</pose>
+            <pose>41 -42 0.02 0 0 0</pose>
             <uri>model://SARclandArea</uri>
           </include>
         </model>
