@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "$(date)"
-./gradlew &
-sleep 15
+./gradlew  -q --console=plain &
+sleep 2
 LOG_ROS="ros.log"
 LOG_JAS="jason.log"
 PIDS_ROS=$(ps aux --sort=-%cpu | grep ros | awk 'NR<21{print $2}' | tr '\n' ',' | sed 's/.$//')
