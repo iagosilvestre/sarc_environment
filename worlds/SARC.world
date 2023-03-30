@@ -113,37 +113,37 @@
         </model>
 			<model name='MRS_tree_simples_fire0'>
           <include>
-            <pose>-59.41758017438629 1.523840811312687 0 0 0 0</pose>
+            <pose>61.64039131419266 89.42338907076771 0 0 0 0</pose>
             <uri>model://MRS_tree_simples_fire</uri>
           </include>
         </model>
 			<model name='MRS_tree_simples_close0'>
           <include>
-            <pose>-9.252394851854824 -7.560380364246467 0 0 0 0</pose>
+            <pose>93.6538358161614 108.10031675755087 0 0 0 0</pose>
             <uri>model://MRS_tree_simples_close</uri>
           </include>
         </model>
 			<model name='MRS_tree_simple0'>
           <include>
-            <pose>-88.9757306468541 -22.911594708162824 0 0 0 0</pose>
+            <pose>19.07391645918552 98.91166416172564 0 0 0 0</pose>
             <uri>model://MRS_tree_simple</uri>
           </include>
         </model>
 			<model name='SARclandArea'>
           <include>
-            <pose>120 -114 0.02 0 0 0</pose>
+            <pose>-119 -109 0.02 0 0 0</pose>
             <uri>model://SARclandArea</uri>
           </include>
         </model>
 			<model name='SARckc'>
           <include>
-            <pose>0 0 100 0 0 -2.35619</pose>
+            <pose>0 0 100 0 0 0.785398</pose>
             <uri>model://SARckc</uri>
           </include>
         </model>
 			<model name='SARckc_floor'>
           <include>
-            <pose>0 0 100 0 0 -2.35619</pose>
+            <pose>0 0 100 0 0 0.785398</pose>
             <uri>model://SARckc_floor</uri>
           </include>
         </model>
