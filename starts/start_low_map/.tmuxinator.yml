@@ -61,7 +61,7 @@ windows:
           sleep 15;
           rosservice call /$UAV_NAME/control_manager/motors 0;
           sleep 0.1;
-          rosservice call /uav1/control_manager/switch_tracker LandoffTracker
+          rosservice call /uav1/control_manager/switch_tracker LandoffTracker;
           rosservice call /uav1/uav_manager/land
           #rosservice call /uav1/mavros/set_mode 0 MANUAL
        # - waitForOdometry;export UAV_NAME=uav2;
