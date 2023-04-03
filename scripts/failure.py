@@ -28,23 +28,25 @@ class Failure:
     def some_callback(self,data):
         global myvar
         myvar = data
-        rospy.loginfo('Got the message: ' + str(data))
+        rospy.loginfo('Agent detected failure in motors: ' + str(data))
+        rospy.loginfo('Swapping to landoff Tracker')
+        self.tracker('LandoffTracker')
+        rospy.loginfo('Initializing emergency landing')
+        self.land()
         
 
     def callback(self, data):
-        x_pub=rospy.Publisher ('/failure_uav1', Int8, queue_size=10)
-        y_pub=rospy.Publisher ('/agent_detected_failure_uav1', String, queue_size=10)
-        x = Int8()
-        x = 1
+        x_pub=rospy.Publisher ('/failure_uav1', Int8, queue_size=1)
         count=1
         rospy.Subscriber('/agent_detected_failure_uav1', String, self.some_callback)
 
-        r = rospy.Rate(2)
+        r = rospy.Rate(10)
         
         while not rospy.is_shutdown():
             if (count == 1):
                 rospy.loginfo('Turning off motors')
-                x_pub.publish(x)
+                self.motor1(0) 
+            x_pub.publish(1)
             r.sleep()
             count+=1
             #rospy.signal_shutdown("yes")
@@ -55,6 +57,7 @@ class Failure:
         self.subscriber = rospy.Subscriber('/' + uav_name + '/uav_manager/diagnostics', UavManagerDiagnostics, self.callback)
         self.motor1 = rospy.ServiceProxy('/uav1/control_manager/motors', SetBool)
         self.tracker = rospy.ServiceProxy('/uav1/control_manager/switch_tracker', mrsString)
+        self.land = rospy.ServiceProxy('/uav1/uav_manager/land', Trigger)
         rospy.loginfo('initialized')
         rospy.spin()
 
