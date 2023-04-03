@@ -58,15 +58,14 @@ my_number_string(S) :- my_number(N)
 //////////////// Calculating land position
 +!hover
    <- -+status("hovering");
-      .wait(200);
+      .wait(1000);
+      .print("hovering");
       !hover.
 
 +!detected_failure(N)
    :  my_number(N)
-      & status("hovering")
    <- .print("test failure detection");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","adf",1);
-
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","adf",N).
 
 +!calculate_trajectory
    :  my_number(N)
@@ -259,5 +258,6 @@ my_number_string(S) :- my_number(N)
 
 
 //////////////// Handling plan failure
++!detected_failure(_).
 +!detected_fire(_).
 +!found_fire(_, _, _).

@@ -57,12 +57,12 @@ windows:
           rosservice call /$UAV_NAME/mavros/set_mode 0 offboard;
           rosservice call /$UAV_NAME/uav_manager/takeoff;
           sleep 5;
-          rosservice call /$UAV_NAME/control_manager/goto_altitude "30";
-          sleep 15;
-          rosservice call /$UAV_NAME/control_manager/motors 0;
-          sleep 0.1;
-          rosservice call /uav1/control_manager/switch_tracker LandoffTracker;
-          rosservice call /uav1/uav_manager/land
+          rosservice call /$UAV_NAME/control_manager/goto_altitude "30"
+          #sleep 15;
+          #rosservice call /$UAV_NAME/control_manager/motors 0;
+          #sleep 0.1;
+          #rosservice call /uav1/control_manager/switch_tracker LandoffTracker;
+          #rosservice call /uav1/uav_manager/land
           #rosservice call /uav1/mavros/set_mode 0 MANUAL
        # - waitForOdometry;export UAV_NAME=uav2;
        #   sleep 15;rosservice call /uav1/uav_manager/midair_activation          rosservice call /$UAV_NAME/mavros/set_mode 0 MANUAL;
@@ -98,8 +98,9 @@ windows:
       layout: tiled
       panes:
        # uav 1
-        - waitForSimulation; sleep 10; rosrun sarc_environment fall.py;
-          rosrun sarc_environment landing.py
+        - waitForSimulation;
+           sleep 30;
+           rosrun sarc_environment landing.py
         # uav 2
         #- waitForSimulation; sleep 50; rosrun sarc_environment fall2.py
         # uav 3
