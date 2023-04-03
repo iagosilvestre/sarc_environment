@@ -29,9 +29,11 @@ class Failure:
         global myvar
         myvar = data
         rospy.loginfo('Agent detected failure in motors: ' + str(data))
-        rospy.loginfo('Swapping to landoff Tracker')
-        self.tracker('LandoffTracker')
-        rospy.loginfo('Initializing emergency landing')
+        rospy.loginfo('Turning motors back on')
+        self.motor1(1) 
+        #rospy.loginfo('Swapping to landoff Tracker')
+        #self.tracker('LandoffTracker')
+        rospy.loginfo('Initializing landing')
         self.land()
         
 
@@ -40,7 +42,7 @@ class Failure:
         count=1
         rospy.Subscriber('/agent_detected_failure_uav1', String, self.some_callback)
 
-        r = rospy.Rate(10)
+        r = rospy.Rate(2)
         
         while not rospy.is_shutdown():
             if (count == 1):
