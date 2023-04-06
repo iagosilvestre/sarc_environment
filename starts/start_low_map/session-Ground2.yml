@@ -57,7 +57,7 @@ windows:
           rosservice call /$UAV_NAME/mavros/set_mode 0 offboard;
           rosservice call /$UAV_NAME/uav_manager/takeoff
           #sleep 5;
-          #rosservice call /$UAV_NAME/control_manager/goto_altitude "30"
+          #rosservice call /$UAV_NAME/control_manager/goto_altitude "20"
           #sleep 15;
           #rosservice call /$UAV_NAME/control_manager/motors 0;
           #sleep 0.1;
