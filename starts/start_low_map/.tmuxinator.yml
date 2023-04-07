@@ -55,9 +55,9 @@ windows:
           rosservice call /$UAV_NAME/control_manager/motors 1;
           rosservice call /$UAV_NAME/mavros/cmd/arming 1;
           rosservice call /$UAV_NAME/mavros/set_mode 0 offboard;
-          rosservice call /$UAV_NAME/uav_manager/takeoff
-          #sleep 5;
-          #rosservice call /$UAV_NAME/control_manager/goto_altitude "20"
+          rosservice call /$UAV_NAME/uav_manager/takeoff;
+          sleep 5;
+          rosservice call /$UAV_NAME/control_manager/goto_altitude "5"
           #sleep 15;
           #rosservice call /$UAV_NAME/control_manager/motors 0;
           #sleep 0.1;
@@ -67,7 +67,7 @@ windows:
        # - waitForOdometry;export UAV_NAME=uav2;
        #   sleep 15;rosservice call /uav1/uav_manager/midair_activation          rosservice call /$UAV_NAME/mavros/set_mode 0 MANUAL;
        #   rosservice call /$UAV_NAME/control_manager/motors 1;
-       #   rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+       #   rosservice call /$UAV_NAME/mavros/cmd/arming 1; rosservice call /uav1/control_manager/goto_altitude "2"
        #   rosservice call /$UAV_NAME/mavros/set_mode 0 offboard;
        #   rosservice call /$UAV_NAME/uav_manager/takeoff
        # - waitForOdometry;export UAV_NAME=uav3;
